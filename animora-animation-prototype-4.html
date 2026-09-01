@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Animora — Animation Studio</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#08070d;color:#f5f2ff;font-family:Inter,system-ui,-apple-system,sans-serif}
+button,input{font:inherit}.app{min-height:100vh;max-width:1100px;margin:auto;padding:24px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:800;font-size:22px}.brand span{color:#9b6cff}
+.nav{display:flex;gap:8px}.nav button{background:#14111d;border:1px solid #282235;color:#aaa0ba;padding:10px 14px;border-radius:12px;cursor:pointer}.nav .on{color:#fff;background:#6e3df5;border-color:#6e3df5}
+.hero{margin-top:26px;padding:30px;border:1px solid #292235;border-radius:28px;background:radial-gradient(circle at 80% 20%,#3a206c 0,#151020 30%,#0c0912 65%)}
+h1{font-size:46px;max-width:650px;margin:0 0 12px;letter-spacing:-2px}.sub{color:#aaa2b7;max-width:620px;line-height:1.6}
+.search{margin-top:22px;width:100%;padding:15px 18px;border-radius:15px;border:1px solid #332b40;background:#0d0b14;color:#fff;outline:none}
+.section{margin-top:28px}.section h2{font-size:20px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:#11101a;border:1px solid #272131;border-radius:20px;overflow:hidden}.thumb{height:170px;background:linear-gradient(135deg,#24114a,#5d32c7 50%,#11101a);display:flex;align-items:center;justify-content:center;font-size:48px}
+.cardbody{padding:16px}.muted{color:#91889f;font-size:13px}.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.price{color:#b38cff;font-weight:800}
+.pill{display:inline-block;padding:6px 9px;border-radius:999px;background:#1b1725;color:#bdb3c9;font-size:12px;margin:4px 4px 0 0}
+.cta{width:100%;margin-top:12px;padding:12px;border:0;border-radius:13px;background:#7342f5;color:#fff;font-weight:700;cursor:pointer}
+.screen{display:none}.screen.active{display:block}.panel{padding:24px;background:#11101a;border:1px solid #272131;border-radius:24px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#f5f2ff;color:#100d16;padding:12px 18px;border-radius:12px;display:none}
+@media(max-width:760px){.grid{grid-template-columns:1fr}h1{font-size:36px}.nav{overflow:auto}.app{padding:16px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+<div class="brand">Ani<span>mora</span></div>
+<nav class="nav">
+<button class="on" onclick="show('home',this)">Home</button>
+<button onclick="show('explore',this)">Explore</button>
+<button onclick="show('library',this)">Library</button>
+</nav>
+</header>
+
+<main id="home" class="screen active">
+<section class="hero">
+<div class="muted">ANIMATION CREATIVE SUITE</div>
+<h1>Turn ideas into motion.</h1>
+<p class="sub">Discover animation assets, build scenes, and organize your creative projects in one dark, focused workspace.</p>
+<input class="search" placeholder="Search characters, backgrounds, effects..." oninput="filter(this.value)">
+</section>
+<section class="section"><h2>Featured for you</h2><div class="grid" id="cards"></div></section>
+</main>
+
+<main id="explore" class="screen">
+<section class="section"><h2>Explore animation assets</h2>
+<p class="sub">Characters, environments, motion packs and visual effects.</p>
+<div class="grid" id="exploreCards"></div></section>
+</main>
+
+<main id="library" class="screen">
+<section class="section"><h2>Your library</h2>
+<div class="panel">
+<div class="row"><div><strong>Dreamscape Project</strong><div class="muted">24 fps · 02:15 · 18 scenes</div></div>
+<button class="cta" style="width:auto" onclick="toast('Project opened')">Open project</button></div>
+<hr style="border-color:#282235;margin:20px 0">
+<div class="muted">Recent assets</div>
+<p>Anime Hero Rig · Dark Fantasy Environments · Neon City Pack</p>
+</div></section>
+</main>
+<div class="toast" id="toast"></div>
+</div>
+
+<script>
+const items=[
+['Anime Hero Rig','Character Rig','24.99','♟'],
+['Dark Fantasy Environments','Background Pack','19.99','☾'],
+['Action Moves Pack','Animation Pack','9.99','✦'],
+['Neon City','Scene Pack','14.99','⌁'],
+['Magic Effects','VFX Pack','7.99','✧'],
+['Stylized Nature','Background Pack','12.99','◈']
+];
+function card(x){return `<article class="card"><div class="thumb">${x[3]}</div><div class="cardbody">
+<div class="muted">${x[1]}</div><div class="row"><strong>${x[0]}</strong><span class="price">$${x[2]}</span></div>
+<div><span class="pill">HD</span><span class="pill">Editable</span></div>
+<button class="cta" onclick="toast('${x[0]} added to library')">Add to Library</button>
+</div></article>`}
+function render(arr,el){document.getElementById(el).innerHTML=arr.map(card).join('')}
+render(items.slice(0,3),'cards');render(items,'exploreCards');
+function show(id,btn){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));btn.classList.add('on')}
+function filter(q){render(items.filter(x=>x.join(' ').toLowerCase().includes(q.toLowerCase())),'cards')}
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',1800)}
+</script>
+</body>
+</html>
