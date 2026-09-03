@@ -59,21 +59,12 @@ h1{font-size:46px;max-width:650px;margin:0 0 12px;letter-spacing:-2px}.sub{color
   cursor:pointer;
 }
 
-.bottom-nav button span{
-  font-size:24px;
-  line-height:1;
+.bottom-nav button.active{
+  color:#9b6cff;
 }
 
-.bottom-nav button small{
-  font-size:11px;
-}
-
-.bottom-nav button:hover{
-  color:#fff;
-}
-
-.app{
-  padding-bottom:90px;
+.bottom-nav button.active span{
+  transform:scale(1.1);
 }
 </style>
 </head>
@@ -282,13 +273,25 @@ if (AnimoraAuth.isLoggedIn() && currentUser) {
     "Welcome back, " + currentUser.name + "!";
 }
   console.log("Animora Authentication v1 loaded");
-function showPage(pageId) {
+  function showPage(pageId) {
   document.querySelectorAll(".app-page").forEach(page => {
     page.style.display = "none";
   });
 
   document.getElementById(pageId).style.display = "block";
-}
+
+  document.querySelectorAll(".bottom-nav button").forEach(button => {
+    button.classList.remove("active");
+  });
+
+  const activeButton = document.querySelector(
+    '.bottom-nav button[onclick*="' + pageId + '"]'
+  );
+
+  if (activeButton) {
+    activeButton.classList.add("active");
+  }
+  }
 function loadProfile() {
   const user = AnimoraAuth.getUser();
 
