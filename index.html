@@ -106,8 +106,13 @@ h1{font-size:46px;max-width:650px;margin:0 0 12px;letter-spacing:-2px}.sub{color
 
 <section id="profile" class="app-page" style="display:none;">
   <h2>Profile</h2>
-  <p>User profile information.</p>
-</section> 
+
+  <div id="profileInfo"></div>
+
+  <button class="cta" onclick="logoutUser()">
+    Logout
+  </button>
+</section>
   <nav class="bottom-nav">
   <button onclick="showPage('home')">Home</button>
   <button onclick="showPage('explore')">Explore</button>
@@ -196,6 +201,25 @@ function showPage(pageId) {
 
   document.getElementById(pageId).style.display = "block";
 }
+function loadProfile() {
+  const user = AnimoraAuth.getUser();
+
+  if (user) {
+    document.getElementById("profileInfo").innerHTML = `
+      <p><strong>Name:</strong> ${user.name}</p>
+      <p><strong>Email:</strong> ${user.email}</p>
+    `;
+  }
+}
+
+function logoutUser() {
+  AnimoraAuth.logout();
+  toast("Logged out successfully.");
+  location.reload();
+}
+
+loadProfile();
+console.log("Animora Authentication v1 loaded");
 </script>
 </body>
 </html>
