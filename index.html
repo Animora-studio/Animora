@@ -89,6 +89,31 @@ h1{font-size:46px;max-width:650px;margin:0 0 12px;letter-spacing:-2px}.sub{color
   ">Login</button>
 </section>
  <div id="userWelcome" class="muted" style="padding:20px;"></div> 
+ <section id="home" class="app-page">
+  <h2>Home</h2>
+  <p>Welcome to Animora.</p>
+</section>
+
+<section id="explore" class="app-page" style="display:none;">
+  <h2>Explore</h2>
+  <p>Browse animations here.</p>
+</section>
+
+<section id="favorites" class="app-page" style="display:none;">
+  <h2>Favorites</h2>
+  <p>Your saved animations will appear here.</p>
+</section>
+
+<section id="profile" class="app-page" style="display:none;">
+  <h2>Profile</h2>
+  <p>User profile information.</p>
+</section> 
+  <nav class="bottom-nav">
+  <button onclick="showPage('home')">Home</button>
+  <button onclick="showPage('explore')">Explore</button>
+  <button onclick="showPage('favorites')">Favorites</button>
+  <button onclick="showPage('profile')">Profile</button>
+  </nav>
   <div class="toast" id="toast"></div>
 </div>
 
@@ -164,6 +189,13 @@ if (AnimoraAuth.isLoggedIn() && currentUser) {
     "Welcome back, " + currentUser.name + "!";
 }
   console.log("Animora Authentication v1 loaded");
+function showPage(pageId) {
+  document.querySelectorAll(".app-page").forEach(page => {
+    page.style.display = "none";
+  });
+
+  document.getElementById(pageId).style.display = "block";
+}
 </script>
 </body>
 </html>
