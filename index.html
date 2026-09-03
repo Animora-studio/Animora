@@ -210,11 +210,25 @@ const items=[
 ['Magic Effects','VFX Pack','7.99','✧'],
 ['Stylized Nature','Background Pack','12.99','◈']
 ];
-function card(x){return `<article class="card"><div class="thumb">${x[3]}</div><div class="cardbody">
-<div class="muted">${x[1]}</div><div class="row"><strong>${x[0]}</strong><span class="price">$${x[2]}</span></div>
-<div><span class="pill">HD</span><span class="pill">Editable</span></div>
-<button class="cta" onclick="toast('${x[0]} added to library')">Add to Library</button>
-</div></article>`}
+function card(x){
+  return `<article class="card" onclick="toast('${x[0]} selected')">
+    <div class="thumb">${x[3]}</div>
+    <div class="cardbody">
+      <div class="muted">${x[1]}</div>
+      <div class="row">
+        <strong>${x[0]}</strong>
+        <span class="price">$${x[2]}</span>
+      </div>
+      <div>
+        <span class="pill">HD</span>
+        <span class="pill">Editable</span>
+      </div>
+      <button class="cta" onclick="event.stopPropagation(); toast('${x[0]} added to library')">
+        Add to Library
+      </button>
+    </div>
+  </article>`
+}
 function render(arr,el){document.getElementById(el).innerHTML=arr.map(card).join('')}
 render(items.slice(0,3),'cards');render(items,'exploreCards');
 function show(id,btn){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));btn.classList.add('on')}
@@ -293,7 +307,6 @@ function showPage(pageId) {
   }
 }
 
-function loadProfile() {
 function loadProfile() {
   const user = AnimoraAuth.getUser();
 
