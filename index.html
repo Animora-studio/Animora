@@ -281,12 +281,18 @@ if (AnimoraAuth.isLoggedIn() && currentUser) {
     "Welcome back, " + currentUser.name + "!";
 }
   console.log("Animora Authentication v1 loaded");
-function showPage(pageId) {
-  document.querySelectorAll(".app-page").forEach(page => {
+  function showPage(pageId) {
+  document.querySelectorAll(".screen, .app-page").forEach(page => {
     page.style.display = "none";
+    page.classList.remove("active");
   });
 
-  document.getElementById(pageId).style.display = "block";
+  const page = document.getElementById(pageId);
+
+  if (page) {
+    page.style.display = "block";
+    page.classList.add("active");
+  }
 
   document.querySelectorAll(".bottom-nav button").forEach(button => {
     button.classList.remove("active");
@@ -296,19 +302,8 @@ function showPage(pageId) {
     '.bottom-nav button[onclick*="' + pageId + '"]'
   );
 
-  if (activeButton) {
+    if (activeButton) {
     activeButton.classList.add("active");
-  }
-}
-
-function loadProfile() {
-  const user = AnimoraAuth.getUser();
-
-  if (user) {
-    document.getElementById("profileInfo").innerHTML = `
-      <p><strong>Name:</strong> ${user.name}</p>
-      <p><strong>Email:</strong> ${user.email}</p>
-    `;
   }
 }
 
