@@ -88,6 +88,7 @@ h1{font-size:46px;max-width:650px;margin:0 0 12px;letter-spacing:-2px}.sub{color
     toast(r.message);
   ">Login</button>
 </section>
+ <div id="userWelcome" class="muted" style="padding:20px;"></div> 
   <div class="toast" id="toast"></div>
 </div>
 
@@ -112,13 +113,7 @@ function filter(q){render(items.filter(x=>x.join(' ').toLowerCase().includes(q.t
 function toast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',1800)}
 console.log("Animora authentication setup started"); </script>
 <script>
-  // Animora Authentication v1
-  const AnimoraAuth = {
-    getUser() {
-      const user = localStorage.getItem("animora_user");
-      return user ? JSON.parse(user) : null;
-    },
-
+  // Animora Authentication v
     signup(name, email, password) {
       if (!name || !email || !password) {
         return { success: false, message: "Please fill in all fields." };
@@ -154,6 +149,12 @@ console.log("Animora authentication setup started"); </script>
     }
   };
 
+ const currentUser = AnimoraAuth.getUser();
+
+if (AnimoraAuth.isLoggedIn() && currentUser) {
+  document.getElementById("userWelcome").textContent =
+    "Welcome back, " + currentUser.name + "!";
+}
   console.log("Animora Authentication v1 loaded");
 </script>
 </body>
