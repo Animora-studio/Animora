@@ -81,6 +81,6 @@ render(items.slice(0,3),'cards');render(items,'exploreCards');
 function show(id,btn){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('on'));btn.classList.add('on')}
 function filter(q){render(items.filter(x=>x.join(' ').toLowerCase().includes(q.toLowerCase())),'cards')}
 function toast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',1800)}
-console.log("Animora login system coming soon"); </script>
+console.log("Animora authentication setup started"); </script>
 </body>
 </html>
