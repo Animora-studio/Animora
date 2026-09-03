@@ -273,7 +273,7 @@ if (AnimoraAuth.isLoggedIn() && currentUser) {
     "Welcome back, " + currentUser.name + "!";
 }
   console.log("Animora Authentication v1 loaded");
-  function showPage(pageId) {
+function showPage(pageId) {
   document.querySelectorAll(".app-page").forEach(page => {
     page.style.display = "none";
   });
@@ -291,7 +291,9 @@ if (AnimoraAuth.isLoggedIn() && currentUser) {
   if (activeButton) {
     activeButton.classList.add("active");
   }
-  }
+}
+
+function loadProfile() {
 function loadProfile() {
   const user = AnimoraAuth.getUser();
 
