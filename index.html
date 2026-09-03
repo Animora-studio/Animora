@@ -148,7 +148,6 @@ console.log("Animora authentication setup started"); </script>
       return localStorage.getItem("animora_logged_in") === "true";
     }
   };
-
  const currentUser = AnimoraAuth.getUser();
 
 if (AnimoraAuth.isLoggedIn() && currentUser) {
