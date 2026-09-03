@@ -112,9 +112,13 @@ function show(id,btn){document.querySelectorAll('.screen').forEach(x=>x.classLis
 function filter(q){render(items.filter(x=>x.join(' ').toLowerCase().includes(q.toLowerCase())),'cards')}
 function toast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',1800)}
 console.log("Animora authentication setup started"); </script>
-<script>
-  // Animora Authentication v
-    signup(name, email, password) {
+<script> 
+
+  
+    // Animora Authentication v1
+const AnimoraAuth = {
+
+  signup(name, email, password) {
       if (!name || !email || !password) {
         return { success: false, message: "Please fill in all fields." };
       }
@@ -126,7 +130,10 @@ console.log("Animora authentication setup started"); </script>
     },
 
     login(email, password) {
-      const user = this.getUser();
+      getUser() {
+  const user = localStorage.getItem("animora_user");
+  return user ? JSON.parse(user) : null;
+},
 
       if (!user) {
         return { success: false, message: "No Animora account found." };
