@@ -82,5 +82,50 @@ function show(id,btn){document.querySelectorAll('.screen').forEach(x=>x.classLis
 function filter(q){render(items.filter(x=>x.join(' ').toLowerCase().includes(q.toLowerCase())),'cards')}
 function toast(t){const e=document.getElementById('toast');e.textContent=t;e.style.display='block';setTimeout(()=>e.style.display='none',1800)}
 console.log("Animora authentication setup started"); </script>
+<script>
+  // Animora Authentication v1
+  const AnimoraAuth = {
+    getUser() {
+      const user = localStorage.getItem("animora_user");
+      return user ? JSON.parse(user) : null;
+    },
+
+    signup(name, email, password) {
+      if (!name || !email || !password) {
+        return { success: false, message: "Please fill in all fields." };
+      }
+
+      const user = { name, email, password };
+      localStorage.setItem("animora_user", JSON.stringify(user));
+
+      return { success: true, message: "Account created successfully." };
+    },
+
+    login(email, password) {
+      const user = this.getUser();
+
+      if (!user) {
+        return { success: false, message: "No Animora account found." };
+      }
+
+      if (user.email !== email || user.password !== password) {
+        return { success: false, message: "Incorrect email or password." };
+      }
+
+      localStorage.setItem("animora_logged_in", "true");
+      return { success: true, message: "Login successful." };
+    },
+
+    logout() {
+      localStorage.removeItem("animora_logged_in");
+    },
+
+    isLoggedIn() {
+      return localStorage.getItem("animora_logged_in") === "true";
+    }
+  };
+
+  console.log("Animora Authentication v1 loaded");
+</script>
 </body>
 </html>
