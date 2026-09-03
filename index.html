@@ -59,7 +59,36 @@ h1{font-size:46px;max-width:650px;margin:0 0 12px;letter-spacing:-2px}.sub{color
 <p>Anime Hero Rig · Dark Fantasy Environments · Neon City Pack</p>
 </div></section>
 </main>
-<div class="toast" id="toast"></div>
+<section class="section">
+  <h2>Animora Account</h2>
+
+  <input id="signupName" class="search" placeholder="Full Name">
+  <input id="signupEmail" class="search" placeholder="Email">
+  <input id="signupPassword" class="search" type="password" placeholder="Password">
+
+  <button class="cta" onclick="
+    const r=AnimoraAuth.signup(
+      document.getElementById('signupName').value,
+      document.getElementById('signupEmail').value,
+      document.getElementById('signupPassword').value
+    );
+    toast(r.message);
+  ">Sign Up</button>
+
+  <br><br>
+
+  <input id="loginEmail" class="search" placeholder="Email">
+  <input id="loginPassword" class="search" type="password" placeholder="Password">
+
+  <button class="cta" onclick="
+    const r=AnimoraAuth.login(
+      document.getElementById('loginEmail').value,
+      document.getElementById('loginPassword').value
+    );
+    toast(r.message);
+  ">Login</button>
+</section>
+  <div class="toast" id="toast"></div>
 </div>
 
 <script>
