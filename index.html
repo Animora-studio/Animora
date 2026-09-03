@@ -30,27 +30,50 @@ h1{font-size:46px;max-width:650px;margin:0 0 12px;letter-spacing:-2px}.sub{color
 .animation-card h3{
   margin-bottom:8px;
 }
-
 .bottom-nav{
   position:fixed;
   bottom:0;
   left:0;
   right:0;
+  height:72px;
   display:flex;
   justify-content:space-around;
-  padding:12px;
+  align-items:center;
   background:#11101a;
   border-top:1px solid #272131;
+  z-index:1000;
+  padding:8px 10px;
 }
 
 .bottom-nav button{
+  flex:1;
+  height:58px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
   background:none;
-  border:none;
-  color:#fff;
+  border:0;
+  color:#91889f;
   cursor:pointer;
 }
+
+.bottom-nav button span{
+  font-size:24px;
+  line-height:1;
+}
+
+.bottom-nav button small{
+  font-size:11px;
+}
+
+.bottom-nav button:hover{
+  color:#fff;
+}
+
 .app{
-  padding-bottom:80px;
+  padding-bottom:90px;
 }
 </style>
 </head>
