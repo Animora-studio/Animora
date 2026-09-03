@@ -163,12 +163,27 @@ h1{font-size:46px;max-width:650px;margin:0 0 12px;letter-spacing:-2px}.sub{color
     Logout
   </button>
 </section>
-  <nav class="bottom-nav">
-  <button onclick="showPage('home')">Home</button>
-  <button onclick="showPage('explore')">Explore</button>
-  <button onclick="showPage('favorites')">Favorites</button>
-  <button onclick="showPage('profile')">Profile</button>
-  </nav>
+<nav class="bottom-nav">
+  <button onclick="showPage('home')">
+    <span>⌂</span>
+    <small>Home</small>
+  </button>
+
+  <button onclick="showPage('explore')">
+    <span>◉</span>
+    <small>Explore</small>
+  </button>
+
+  <button onclick="showPage('favorites')">
+    <span>♡</span>
+    <small>Favorites</small>
+  </button>
+
+  <button onclick="showPage('profile')">
+    <span>◯</span>
+    <small>Profile</small>
+  </button>
+</nav>
   <div class="toast" id="toast"></div>
 </div>
 
