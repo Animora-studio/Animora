@@ -70,6 +70,14 @@ h1{
 
 <h1>Animora v3</h1>
 
+<button onclick="showLibrary()" class="cta">
+  📚 My Library
+</button>
+
+<br><br>
+
+<div id="library"></div>
+
 <div class="grid" id="exploreGrid"></div>
 
 <div id="toast"></div>
@@ -131,6 +139,22 @@ function showToast(text){
   setTimeout(()=>{
     toast.style.display="none";
   },2000);
+}
+
+  function showLibrary(){
+  const library =
+    JSON.parse(localStorage.getItem("animora_library")) || [];
+
+  const box = document.getElementById("library");
+
+  if(library.length === 0){
+    box.innerHTML = "<p>Your library is empty.</p>";
+    return;
+  }
+
+  box.innerHTML =
+    "<h2>My Library</h2>" +
+    library.map(item => `<p>✅ ${item}</p>`).join("");
 }
 
 renderAssets();
