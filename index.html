@@ -106,17 +106,39 @@ z-index:9999;
 
 <div class="grid" id="exploreGrid"></div>
 
+<div id="assetDetail" style="display:none;">
+  <button class="cta" onclick="closeAssetDetail()">← Back</button>
+
+  <div class="thumb" id="detailThumb"></div>
+
+  <h2 id="detailTitle"></h2>
+  <p id="detailDescription"></p>
+
+  <button class="cta" id="detailLibraryButton">
+    📚 Add To Library
+  </button>
+</div>
+
 <div id="toast"></div>
 
 <script>
 const items = [
-["Anime Hero Rig","♟"],
-["Dark Fantasy Environments","☾"],
-["Action Moves Pack","✦"],
-["Neon City","⌁"],
-["Magic Effects","✧"],
-["Stylized Nature","◈"]
+  ["Anime Hero Rig","♟"],
+  ["Dark Fantasy Environments","☾"],
+  ["Action Moves Pack","✦"],
+  ["Neon City","⌁"],
+  ["Magic Effects","✧"],
+  ["Stylized Nature","◈"]
 ];
+
+const descriptions = {
+  "Anime Hero Rig":"A character rig designed for expressive animated movement.",
+  "Dark Fantasy Environments":"Dark atmospheric environments for fantasy animation.",
+  "Action Moves Pack":"Dynamic movement and action animation assets.",
+  "Neon City":"A futuristic neon-filled city environment.",
+  "Magic Effects":"Visual effects for spells, magic, and energy.",
+  "Stylized Nature":"Stylized natural environments and scenery."
+};
 
 function renderAssets(){
   let html="";
@@ -128,6 +150,11 @@ function renderAssets(){
 
         <div class="cardbody">
           <h3>${item[0]}</h3>
+
+<button class="cta"
+onclick="openAssetDetail('${item[0]}','${item[1]}')">
+View Details
+</button>
 
           <button class="cta"
           onclick="addToLibrary('${item[0]}')">
@@ -156,6 +183,26 @@ function addToLibrary(name){
   showToast(name + " added to library");
 }
 
+function openAssetDetail(name, icon){
+  document.getElementById("exploreGrid").style.display="none";
+  document.getElementById("library").style.display="none";
+
+  document.getElementById("assetDetail").style.display="block";
+
+  document.getElementById("detailThumb").innerText=icon;
+  document.getElementById("detailTitle").innerText=name;
+  document.getElementById("detailDescription").innerText=descriptions[name];
+
+  document.getElementById("detailLibraryButton").onclick=function(){
+    addToLibrary(name);
+  };
+}
+
+function closeAssetDetail(){
+  document.getElementById("assetDetail").style.display="none";
+  document.getElementById("exploreGrid").style.display="grid";
+}
+  
 function showToast(text){
   const toast=document.getElementById("toast");
 
