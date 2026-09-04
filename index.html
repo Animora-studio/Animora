@@ -306,7 +306,16 @@ if (AnimoraAuth.isLoggedIn() && currentUser) {
     activeButton.classList.add("active");
   }
 }
+function loadProfile() {
+  const user = AnimoraAuth.getUser();
 
+  if (user && document.getElementById("profileInfo")) {
+    document.getElementById("profileInfo").innerHTML = `
+      <p><strong>Name:</strong> ${user.name}</p>
+      <p><strong>Email:</strong> ${user.email}</p>
+    `;
+  }
+  }
 function logoutUser() {
   AnimoraAuth.logout();
   toast("Logged out successfully.");
