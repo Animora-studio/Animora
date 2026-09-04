@@ -1,161 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animora</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<title>Animora v3</title>
 
-    body {
-      background: #0a0a0f;
-      color: white;
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
-    }
+<style>
+body{
+  margin:0;
+  padding:20px;
+  background:#0f1117;
+  color:white;
+  font-family:Arial,sans-serif;
+}
 
-    header {
-      padding: 24px 20px;
-      text-align: center;
-    }
+h1{
+  text-align:center;
+}
 
-    .logo {
-      font-size: 32px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+}
 
-    .tagline {
-      color: #999;
-      margin-top: 8px;
-    }
+.card{
+  background:#1a1d29;
+  border-radius:14px;
+  overflow:hidden;
+}
 
-    main {
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
+.thumb{
+  height:120px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+  background:#252a3d;
+}
 
-    .hero {
-      text-align: center;
-      padding: 70px 20px;
-    }
+.cardbody{
+  padding:12px;
+}
 
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
-    }
+.cta{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
 
-    .hero p {
-      color: #aaa;
-      font-size: 17px;
-      line-height: 1.6;
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 14px 28px;
-      border-radius: 30px;
-      background: white;
-      color: #0a0a0f;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .section-title {
-      margin: 30px 0 18px;
-      font-size: 24px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .card {
-      background: #15151d;
-      border: 1px solid #252532;
-      border-radius: 16px;
-      padding: 25px 15px;
-      min-height: 130px;
-    }
-
-    .card h3 {
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      color: #999;
-      font-size: 14px;
-    }
-
-    @media (max-width: 500px) {
-      .hero h1 {
-        font-size: 34px;
-      }
-
-      .cards {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  </style>
+#toast{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:black;
+  color:white;
+  padding:10px 16px;
+  border-radius:8px;
+  display:none;
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">ANIMORA</div>
-    <div class="tagline">Your world of animation</div>
-  </header>
+<h1>Animora v3</h1>
 
-  <main>
+<div class="grid" id="exploreGrid"></div>
 
-    <section class="hero">
-      <h1>Welcome to Animora</h1>
-      <p>
-        Discover animations, explore new worlds,
-        and experience stories made to move you.
-      </p>
+<div id="toast"></div>
 
-      <a href="#explore" class="button">Explore Animora</a>
-    </section>
+<script>
+const items = [
+["Anime Hero Rig","♟"],
+["Dark Fantasy Environments","☾"],
+["Action Moves Pack","✦"],
+["Neon City","⌁"],
+["Magic Effects","✧"],
+["Stylized Nature","◈"]
+];
 
-    <section id="explore">
-      <h2 class="section-title">Explore</h2>
+function renderAssets(){
+  let html="";
 
-      <div class="cards">
+  items.forEach(item=>{
+    html += `
+      <div class="card">
+        <div class="thumb">${item[1]}</div>
 
-        <div class="card">
-          <h3>🎬 Movies</h3>
-          <p>Discover animated movies.</p>
+        <div class="cardbody">
+          <h3>${item[0]}</h3>
+
+          <button class="cta"
+          onclick="addToLibrary('${item[0]}')">
+          Add To Library
+          </button>
         </div>
-
-        <div class="card">
-          <h3>✨ Series</h3>
-          <p>Explore animated series.</p>
-        </div>
-
-        <div class="card">
-          <h3>🔥 Trending</h3>
-          <p>See what's popular.</p>
-        </div>
-
-        <div class="card">
-          <h3>❤️ Favorites</h3>
-          <p>Keep your favorite animations.</p>
-        </div>
-
       </div>
-    </section>
+    `;
+  });
 
-  </main>
+  document.getElementById("exploreGrid").innerHTML = html;
+}
+
+function addToLibrary(name){
+  let library =
+    JSON.parse(localStorage.getItem("animora_library")) || [];
+
+  if(!library.includes(name)){
+    library.push(name);
+    localStorage.setItem(
+      "animora_library",
+      JSON.stringify(library)
+    );
+  }
+
+  showToast(name + " added to library");
+}
+
+function showToast(text){
+  const toast=document.getElementById("toast");
+
+  toast.innerText=text;
+  toast.style.display="block";
+
+  setTimeout(()=>{
+    toast.style.display="none";
+  },2000);
+}
+
+renderAssets();
+</script>
 
 </body>
 </html>
