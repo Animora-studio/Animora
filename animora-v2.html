@@ -138,9 +138,16 @@ function renderAssets(){
   document.getElementById("exploreGrid").innerHTML = html;
 }
 
-function addToLibrary(name){
-  showToast(name + " added!");
-}
+  function addToLibrary(name){
+  let library = JSON.parse(localStorage.getItem("animora_library")) || [];
+
+  if (!library.includes(name)) {
+    library.push(name);
+    localStorage.setItem("animora_library", JSON.stringify(library));
+  }
+
+  showToast(name + " added to library");
+  }
 
 function showToast(text){
   const toast=document.getElementById("toast");
