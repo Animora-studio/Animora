@@ -54,7 +54,8 @@ h1{
 
 #toast{
   position:fixed;
-  bottom:20px;
+  bottom:80px;
+z-index:9999;
   left:50%;
   transform:translateX(-50%);
   background:black;
@@ -167,7 +168,7 @@ function showToast(text){
 }
 
   function showLibrary(){
-  const library =
+    const library =
     JSON.parse(localStorage.getItem("animora_library")) || [];
 
   const box = document.getElementById("library");
