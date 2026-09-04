@@ -226,8 +226,21 @@ function showToast(text){
   }
 
   box.innerHTML =
-    "<h2>My Library</h2>" +
-    library.map(item => `<p>✅ ${item}</p>`).join("");
+  "<h2>My Library</h2>" +
+  `<div class="grid">` +
+  library.map(item => `
+    <div class="card">
+      <div class="thumb">📦</div>
+      <div class="cardbody">
+        <h3>${item}</h3>
+        <button class="cta"
+        onclick="openAssetDetail('${item}','📦')">
+        View Details
+        </button>
+      </div>
+    </div>
+  `).join("") +
+    `</div>`;
 }
 
 renderAssets();
