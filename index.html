@@ -12,14 +12,19 @@ button,input{font:inherit}.app{min-height:100vh;max-width:1100px;margin:auto;pad
 .hero{margin-top:26px;padding:30px;border:1px solid #292235;border-radius:28px;background:radial-gradient(circle at 80% 20%,#3a206c 0,#151020 30%,#0c0912 65%)}
 h1{font-size:46px;max-width:650px;margin:0 0 12px;letter-spacing:-2px}.sub{color:#aaa2b7;max-width:620px;line-height:1.6}
 .search{margin-top:22px;width:100%;padding:15px 18px;border-radius:15px;border:1px solid #332b40;background:#0d0b14;color:#fff;outline:none}
-.section{margin-top:28px}.section h2{font-size:20px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-..card{
+.section{margin-top:28px}.section h2{font-size:20px}.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;
+  align-items:start;
+}
+.card{
   background:#11101a;
   border:1px solid #272131;
   border-radius:20px;
   overflow:visible;
 }.thumb{height:170px;background:linear-gradient(135deg,#24114a,#5d32c7 50%,#11101a);display:flex;align-items:center;justify-content:center;font-size:48px}
-..cardbody{
+.cardbody{
   padding:16px;
   display:flex;
   flex-direction:column;
