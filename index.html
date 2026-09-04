@@ -63,6 +63,31 @@ h1{
   border-radius:8px;
   display:none;
 }
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:space-around;
+  padding:10px 5px;
+  background:#171a24;
+  border-top:1px solid #292d3d;
+}
+
+.bottom-nav button{
+  background:none;
+  border:none;
+  color:white;
+  font-size:13px;
+  cursor:pointer;
+}
+
+.bottom-nav span{
+  display:block;
+  margin-top:4px;
+}
+  
 </style>
 </head>
 
@@ -160,5 +185,11 @@ function showToast(text){
 renderAssets();
 </script>
 
+  <nav class="bottom-nav">
+  <button onclick="renderAssets()">🎬<span>Explore</span></button>
+  <button onclick="showLibrary()">📚<span>Library</span></button>
+  <button onclick="showToast('Favorites coming soon')">❤️<span>Favorites</span></button>
+</nav>
+  
 </body>
 </html>
