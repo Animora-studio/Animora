@@ -743,8 +743,9 @@ onclick="removeFromFavorites('${item}')">
   document.getElementById("exploreGrid").style.display = "none";
   document.getElementById("assetDetail").style.display = "none";
   document.getElementById("searchBox").style.display = "none";
-
-  const username =
+  document.querySelector(".categories").style.display = "none";
+  
+    const username =
     localStorage.getItem("animora_username") || "Animora Creator";
 
   box.innerHTML = `
