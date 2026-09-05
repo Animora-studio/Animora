@@ -125,7 +125,14 @@ z-index:9999;
 
 <div id="library"></div>
 
-<div class="grid" id="exploreGrid"></div>
+  <input
+  type="text"
+  id="searchBox"
+  placeholder="Search assets..."
+  oninput="searchAssets()"
+  style="width:100%;padding:12px;border-radius:10px;border:none;margin-bottom:15px;">
+
+  <div class="grid" id="exploreGrid"></div>
 
 <div id="assetDetail" style="display:none;">
   <button class="cta" onclick="closeAssetDetail()">← Back</button>
@@ -175,7 +182,9 @@ function renderAssets(){
 
   let html="";
 
-  items.forEach(item=>{
+const filteredItems = window.currentItems || items;
+
+filteredItems.forEach(item=>{
     html += `
       <div class="card">
         <div class="thumb">${item[1]}</div>
