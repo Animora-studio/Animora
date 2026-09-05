@@ -418,12 +418,12 @@ z-index:9999;
 
 <div class="categories">
 
-  <button onclick="filterCategory('All')">All</button>
-  <button onclick="filterCategory('Characters')">Characters</button>
-  <button onclick="filterCategory('Environments')">Environments</button>
-  <button onclick="filterCategory('Animation')">Animation</button>
-  <button onclick="filterCategory('Effects')">Effects</button>
-  <button onclick="filterCategory('Nature')">Nature</button>
+  <button onclick="filterCategory('All', this)">All</button>
+  <button onclick="filterCategory('Characters', this)">Characters</button>
+  <button onclick="filterCategory('Environments', this)">Environments</button>
+  <button onclick="filterCategory('Animation', this)">Animation</button>
+  <button onclick="filterCategory('Effects', this)">Effects</button>
+  <button onclick="filterCategory('Nature', this)">Nature</button>
 
 </div>
     
@@ -535,13 +535,13 @@ onclick="addToFavorites('${item[0]}')">
   document.getElementById("exploreGrid").innerHTML = html;
 }
   
-function filterCategory(category){
+function filterCategory(category, button){
 
   document.querySelectorAll(".categories button").forEach(button => {
   button.classList.remove("active");
 });
 
-event.target.classList.add("active");
+button.classList.add("active");
   
   if(category === "All"){
     window.currentItems = items;
