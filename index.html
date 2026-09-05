@@ -162,6 +162,10 @@ const descriptions = {
 };
 
 function renderAssets(){
+  document.getElementById("assetDetail").style.display="none";
+  document.getElementById("library").style.display="none";
+  document.getElementById("exploreGrid").style.display="grid";
+
   let html="";
 
   items.forEach(item=>{
