@@ -177,6 +177,8 @@ const descriptions = {
   library.innerHTML="";
   library.style.display="none";
 
+  document.getElementById("favorites").style.display="none";
+  document.getElementById("searchBox").style.display="block";   
   document.getElementById("exploreGrid").style.display="grid";
 
   renderAssets();
@@ -297,7 +299,9 @@ function showToast(text){
 box.style.display = "block";
 document.getElementById("exploreGrid").style.display = "none";
 document.getElementById("assetDetail").style.display = "none";
-
+document.getElementById("favorites").style.display = "none";
+document.getElementById("searchBox").style.display = "none";
+    
   if(library.length === 0){
     box.innerHTML = "<p>Your library is empty.</p>";
     return;
@@ -331,7 +335,8 @@ View Details
   document.getElementById("library").style.display = "none";
   document.getElementById("exploreGrid").style.display = "none";
   document.getElementById("assetDetail").style.display = "none";
-
+document.getElementById("searchBox").style.display = "none";
+    
   if(favorites.length === 0){
     box.innerHTML = "<p>Your favorites are empty.</p>";
     return;
