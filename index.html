@@ -273,6 +273,55 @@ z-index:9999;
   margin:25px 0 15px;
   font-size:22px;
 }
+
+  .featured-card{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  padding:20px;
+  margin:15px 0 25px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#1d2130,#151821);
+  border:1px solid #34394d;
+  box-shadow:0 8px 25px rgba(0,0,0,0.25);
+}
+
+.featured-icon{
+  min-width:100px;
+  height:100px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:16px;
+  font-size:55px;
+  background:linear-gradient(135deg,#252a3d,#171a24);
+}
+
+.featured-content{
+  flex:1;
+}
+
+.featured-content small{
+  font-size:10px;
+  letter-spacing:1.3px;
+  opacity:0.65;
+}
+
+.featured-content h2{
+  margin:7px 0;
+  font-size:22px;
+}
+
+.featured-content p{
+  margin:0 0 12px;
+  line-height:1.5;
+  font-size:14px;
+  opacity:0.7;
+}
+
+.featured-content .cta{
+  max-width:220px;
+}
   
 </style>
 </head>
@@ -305,6 +354,27 @@ z-index:9999;
 
 <h2 class="section-title">✨ Explore Assets</h2>
 
+    <div class="featured-card">
+
+  <div class="featured-icon">⌁</div>
+
+  <div class="featured-content">
+    <small>⭐ FEATURED ASSET</small>
+
+    <h2>Neon City</h2>
+
+    <p>
+      A futuristic neon-filled city environment for your animation projects.
+    </p>
+
+    <button class="cta"
+      onclick="openAssetDetail('Neon City','⌁')">
+      View Featured Asset
+    </button>
+  </div>
+
+    </div>
+    
 <button onclick="showLibrary()" class="cta">
   📚 My Library
 </button>
