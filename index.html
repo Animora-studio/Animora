@@ -528,7 +528,46 @@ onclick="addToFavorites('${item[0]}')">
   document.getElementById("exploreGrid").innerHTML = html;
 }
   
+function filterCategory(category){
 
+  if(category === "All"){
+    window.currentItems = items;
+  }
+
+  if(category === "Characters"){
+    window.currentItems = items.filter(item =>
+      item[0] === "Anime Hero Rig"
+    );
+  }
+
+  if(category === "Environments"){
+    window.currentItems = items.filter(item =>
+      item[0] === "Dark Fantasy Environments" ||
+      item[0] === "Neon City"
+    );
+  }
+
+  if(category === "Animation"){
+    window.currentItems = items.filter(item =>
+      item[0] === "Action Moves Pack"
+    );
+  }
+
+  if(category === "Effects"){
+    window.currentItems = items.filter(item =>
+      item[0] === "Magic Effects"
+    );
+  }
+
+  if(category === "Nature"){
+    window.currentItems = items.filter(item =>
+      item[0] === "Stylized Nature"
+    );
+  }
+
+  renderAssets();
+}
+  
 function addToLibrary(name){
   let library =
     JSON.parse(localStorage.getItem("animora_library")) || [];
