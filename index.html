@@ -230,6 +230,42 @@ z-index:9999;
 .profile-card{
   margin-bottom:30px;
 }
+
+  .hero-section{
+  text-align:center;
+  padding:30px 20px;
+  margin-bottom:20px;
+}
+
+.hero-logo{
+  font-size:60px;
+  margin-bottom:10px;
+}
+
+.hero-section h1{
+  font-size:36px;
+  margin:0 0 8px;
+}
+
+.hero-section p{
+  font-size:18px;
+  margin:0 0 12px;
+  opacity:0.85;
+}
+
+.hero-section span{
+  display:block;
+  max-width:500px;
+  margin:auto;
+  line-height:1.6;
+  font-size:14px;
+  opacity:0.6;
+}
+
+.section-title{
+  margin:25px 0 15px;
+  font-size:22px;
+}
   
 </style>
 </head>
@@ -250,7 +286,17 @@ z-index:9999;
 
   <div id="appContent" style="display:none;">
     
-<h1>Animora v3</h1>
+<div class="hero-section">
+  <div class="hero-logo">🎬</div>
+
+  <h1>Animora</h1>
+
+  <p>Your creative animation library</p>
+
+  <span>Discover rigs, environments, effects and animation packs for your next project.</span>
+</div>
+
+<h2 class="section-title">✨ Explore Assets</h2>
 
 <button onclick="showLibrary()" class="cta">
   📚 My Library
