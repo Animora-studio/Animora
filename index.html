@@ -147,6 +147,10 @@ z-index:9999;
   <button class="cta" id="detailLibraryButton">
     📚 Add To Library
   </button>
+
+  <button class="cta" id="detailFavoriteButton">
+  ❤️ Add To Favorites
+</button>
 </div>
 
 <div id="toast"></div>
@@ -281,11 +285,15 @@ function addToLibrary(name){
   document.getElementById("detailTitle").innerText=name;
   document.getElementById("detailDescription").innerText=descriptions[name];
 
-  document.getElementById("detailLibraryButton").onclick=function(){
+    document.getElementById("detailLibraryButton").onclick=function(){
     addToLibrary(name);
   };
-}
 
+  document.getElementById("detailFavoriteButton").onclick=function(){
+    addToFavorites(name);
+  };
+  }
+  
 function closeAssetDetail(){
   document.getElementById("assetDetail").style.display="none";
   document.getElementById("exploreGrid").style.display="grid";
