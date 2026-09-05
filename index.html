@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Animora v3</title>
-
+  
 <style>
 #welcomeScreen{
   text-align:center;
@@ -171,6 +171,64 @@ z-index:9999;
 .bottom-nav span{
   display:block;
   margin-top:4px;
+}
+
+.profile-header{
+  text-align:center;
+  padding:30px 20px 20px;
+}
+
+.profile-avatar{
+  width:90px;
+  height:90px;
+  margin:0 auto 15px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:45px;
+  background:linear-gradient(135deg,#252a3d,#171a24);
+  border:1px solid #292d3d;
+}
+
+.profile-header h2{
+  margin:10px 0 5px;
+  font-size:26px;
+}
+
+.profile-header p{
+  opacity:0.65;
+  margin:0;
+}
+
+.profile-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin:15px 0 20px;
+}
+
+.profile-stat{
+  background:#1a1d29;
+  border:1px solid #292d3d;
+  border-radius:14px;
+  padding:20px;
+  text-align:center;
+}
+
+.profile-stat strong{
+  display:block;
+  font-size:28px;
+  margin-bottom:5px;
+}
+
+.profile-stat span{
+  opacity:0.65;
+  font-size:13px;
+}
+
+.profile-card{
+  margin-bottom:30px;
 }
   
 </style>
@@ -490,24 +548,43 @@ onclick="removeFromFavorites('${item}')">
   document.getElementById("assetDetail").style.display = "none";
   document.getElementById("searchBox").style.display = "none";
 
+  const username =
+    localStorage.getItem("animora_username") || "Animora Creator";
+
   box.innerHTML = `
-    <h2>👤 My Profile</h2>
+    <div class="profile-header">
+      <div class="profile-avatar">👤</div>
 
-    <div class="card">
+      <h2>${username}</h2>
+
+      <p>Welcome back to Animora ✨</p>
+    </div>
+
+    <div class="profile-stats">
+
+      <div class="profile-stat">
+        <strong>${library.length}</strong>
+        <span>Library</span>
+      </div>
+
+      <div class="profile-stat">
+        <strong>${favorites.length}</strong>
+        <span>Favorites</span>
+      </div>
+
+    </div>
+
+    <div class="card profile-card">
       <div class="cardbody">
-        <h3 id="profileName">
-  ${localStorage.getItem("animora_username") || "Animora Creator"}
-</h3>
 
-<button class="cta" onclick="editUsername()">
-  ✏️ Edit Username
-</button>
+        <h3>👤 Account</h3>
 
-        <p>📚 Library Assets: ${library.length}</p>
-
-        <p>❤️ Favorite Assets: ${favorites.length}</p>
+        <button class="cta" onclick="editUsername()">
+          ✏️ Edit Username
+        </button>
 
         <p>✨ Member Since: September 2026</p>
+
       </div>
     </div>
   `;
