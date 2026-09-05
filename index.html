@@ -161,6 +161,13 @@ const descriptions = {
   "Stylized Nature":"Stylized natural environments and scenery."
 };
 
+  function showExplore(){
+  document.getElementById("assetDetail").style.display="none";
+  document.getElementById("library").style.display="none";
+  document.getElementById("exploreGrid").style.display="grid";
+  renderAssets();
+  }
+  
 function renderAssets(){
   document.getElementById("assetDetail").style.display="none";
   document.getElementById("library").style.display="none";
@@ -277,7 +284,7 @@ renderAssets();
 </script>
 
   <nav class="bottom-nav">
-  <button onclick="renderAssets()">🎬<span>Explore</span></button>
+  <button onclick="showExplore()">🎬<span>Explore</span></button>
   <button onclick="showLibrary()">📚<span>Library</span></button>
   <button onclick="showToast('Favorites coming soon')">❤️<span>Favorites</span></button>
 </nav>
