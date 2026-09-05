@@ -267,6 +267,10 @@ function showToast(text){
 
   const box = document.getElementById("library");
 
+box.style.display = "block";
+document.getElementById("exploreGrid").style.display = "none";
+document.getElementById("assetDetail").style.display = "none";
+
   if(library.length === 0){
     box.innerHTML = "<p>Your library is empty.</p>";
     return;
