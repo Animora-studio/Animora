@@ -345,6 +345,12 @@ z-index:9999;
 .categories button:hover{
   background:#252a3d;
 }
+
+  .categories button.active{
+  background:#252a3d;
+  border-color:#555b78;
+  font-weight:bold;
+  }
   
 </style>
 </head>
@@ -531,6 +537,12 @@ onclick="addToFavorites('${item[0]}')">
   
 function filterCategory(category){
 
+  document.querySelectorAll(".categories button").forEach(button => {
+  button.classList.remove("active");
+});
+
+event.target.classList.add("active");
+  
   if(category === "All"){
     window.currentItems = items;
   }
