@@ -254,8 +254,24 @@ function addToLibrary(name){
 
   showToast(name + " added to favorites");
   }
+ 
+  function removeFromFavorites(name){
+  let favorites =
+    JSON.parse(localStorage.getItem("animora_favorites")) || [];
+
+  favorites = favorites.filter(item => item !== name);
+
+  localStorage.setItem(
+    "animora_favorites",
+    JSON.stringify(favorites)
+  );
+
+  showToast(name + " removed from favorites");
+
+  showFavorites();
+  }
   
-function openAssetDetail(name, icon){
+  function openAssetDetail(name, icon){
   document.getElementById("exploreGrid").style.display="none";
   document.getElementById("library").style.display="none";
 
@@ -351,9 +367,14 @@ document.getElementById("searchBox").style.display = "none";
       <div class="cardbody">
         <h3>${item}</h3>
         <button class="cta"
-        onclick="openAssetDetail('${item}','${getAssetIcon(item)}')">
-        View Details
-        </button>
+onclick="openAssetDetail('${item}','${getAssetIcon(item)}')">
+View Details
+</button>
+
+<button class="cta"
+onclick="removeFromFavorites('${item}')">
+💔 Remove from Favorites
+</button>
       </div>
     </div>
   `).join("") +
