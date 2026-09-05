@@ -124,7 +124,9 @@ z-index:9999;
 <br><br>
 
 <div id="library" style="display:none;"></div>
-
+  
+<div id="favorites" style="display:none;"></div>
+  
   <input
   type="text"
   id="searchBox"
@@ -231,6 +233,21 @@ function addToLibrary(name){
   showToast(name + " added to library");
 }
 
+  function addToFavorites(name){
+  let favorites =
+    JSON.parse(localStorage.getItem("animora_favorites")) || [];
+
+  if(!favorites.includes(name)){
+    favorites.push(name);
+    localStorage.setItem(
+      "animora_favorites",
+      JSON.stringify(favorites)
+    );
+  }
+
+  showToast(name + " added to favorites");
+  }
+  
 function openAssetDetail(name, icon){
   document.getElementById("exploreGrid").style.display="none";
   document.getElementById("library").style.display="none";
@@ -299,6 +316,40 @@ View Details
     `</div>`;
 }
 
+  function showFavorites(){
+  const favorites =
+    JSON.parse(localStorage.getItem("animora_favorites")) || [];
+
+  const box = document.getElementById("favorites");
+
+  box.style.display = "block";
+  document.getElementById("library").style.display = "none";
+  document.getElementById("exploreGrid").style.display = "none";
+  document.getElementById("assetDetail").style.display = "none";
+
+  if(favorites.length === 0){
+    box.innerHTML = "<p>Your favorites are empty.</p>";
+    return;
+  }
+
+  box.innerHTML =
+  "<h2>Favorites</h2>" +
+  `<div class="grid">` +
+  favorites.map(item => `
+    <div class="card">
+      <div class="thumb">${getAssetIcon(item)}</div>
+      <div class="cardbody">
+        <h3>${item}</h3>
+        <button class="cta"
+        onclick="openAssetDetail('${item}','${getAssetIcon(item)}')">
+        View Details
+        </button>
+      </div>
+    </div>
+  `).join("") +
+  `</div>`;
+  }
+  
   function searchAssets(){
   const term =
     document.getElementById("searchBox")
@@ -317,7 +368,7 @@ renderAssets();
   <nav class="bottom-nav">
   <button onclick="showExplore()">🎬<span>Explore</span></button>
   <button onclick="showLibrary()">📚<span>Library</span></button>
-  <button onclick="showToast('Favorites coming soon')">❤️<span>Favorites</span></button>
+  <button onclick="showFavorites()">❤️<span>Favorites</span></button>
 </nav>
   
 </body>
