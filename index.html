@@ -495,7 +495,13 @@ onclick="removeFromFavorites('${item}')">
 
     <div class="card">
       <div class="cardbody">
-        <h3>Animora Creator</h3>
+        <h3 id="profileName">
+  ${localStorage.getItem("animora_username") || "Animora Creator"}
+</h3>
+
+<button class="cta" onclick="editUsername()">
+  ✏️ Edit Username
+</button>
 
         <p>📚 Library Assets: ${library.length}</p>
 
@@ -505,6 +511,26 @@ onclick="removeFromFavorites('${item}')">
       </div>
     </div>
   `;
+  }
+
+  function editUsername(){
+  const currentName =
+    localStorage.getItem("animora_username") || "Animora Creator";
+
+  const newName = prompt(
+    "Enter your new username:",
+    currentName
+  );
+
+  if(newName && newName.trim() !== ""){
+    localStorage.setItem(
+      "animora_username",
+      newName.trim()
+    );
+
+    showProfile();
+    showToast("Username updated!");
+  }
   }
   
   function searchAssets(){
