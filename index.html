@@ -203,6 +203,8 @@ z-index:9999;
 <div id="library" style="display:none;"></div>
   
 <div id="favorites" style="display:none;"></div>
+
+<div id="profile" style="display:none;"></div>
   
   <input
   type="text"
@@ -264,6 +266,7 @@ const descriptions = {
   library.style.display = "none";
 
   document.getElementById("favorites").style.display = "none";
+  document.getElementById("profile").style.display = "none";
   document.getElementById("searchBox").style.display = "block";
   document.getElementById("exploreGrid").style.display = "grid";
 
@@ -470,6 +473,39 @@ onclick="removeFromFavorites('${item}')">
   `).join("") +
   `</div>`;
   }
+
+  function showProfile(){
+  const library =
+    JSON.parse(localStorage.getItem("animora_library")) || [];
+
+  const favorites =
+    JSON.parse(localStorage.getItem("animora_favorites")) || [];
+
+  const box = document.getElementById("profile");
+
+  box.style.display = "block";
+  document.getElementById("library").style.display = "none";
+  document.getElementById("favorites").style.display = "none";
+  document.getElementById("exploreGrid").style.display = "none";
+  document.getElementById("assetDetail").style.display = "none";
+  document.getElementById("searchBox").style.display = "none";
+
+  box.innerHTML = `
+    <h2>👤 My Profile</h2>
+
+    <div class="card">
+      <div class="cardbody">
+        <h3>Animora Creator</h3>
+
+        <p>📚 Library Assets: ${library.length}</p>
+
+        <p>❤️ Favorite Assets: ${favorites.length}</p>
+
+        <p>✨ Member Since: September 2026</p>
+      </div>
+    </div>
+  `;
+  }
   
   function searchAssets(){
   const term =
@@ -490,6 +526,7 @@ renderAssets();
   <button onclick="showExplore()">🎬<span>Explore</span></button>
   <button onclick="showLibrary()">📚<span>Library</span></button>
   <button onclick="showFavorites()">❤️<span>Favorites</span></button>
+  <button onclick="showProfile()">👤<span>Profile</span></button>
 </nav>
   
 </body>
