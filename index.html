@@ -322,6 +322,29 @@ z-index:9999;
 .featured-content .cta{
   max-width:220px;
 }
+
+.categories{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:5px 0 15px;
+  margin-bottom:5px;
+}
+
+.categories button{
+  flex-shrink:0;
+  padding:9px 14px;
+  border-radius:20px;
+  border:1px solid #292d3d;
+  background:#1a1d29;
+  color:white;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.categories button:hover{
+  background:#252a3d;
+}
   
 </style>
 </head>
@@ -386,7 +409,18 @@ z-index:9999;
 <div id="favorites" style="display:none;"></div>
 
 <div id="profile" style="display:none;"></div>
-  
+
+<div class="categories">
+
+  <button onclick="filterCategory('All')">All</button>
+  <button onclick="filterCategory('Characters')">Characters</button>
+  <button onclick="filterCategory('Environments')">Environments</button>
+  <button onclick="filterCategory('Animation')">Animation</button>
+  <button onclick="filterCategory('Effects')">Effects</button>
+  <button onclick="filterCategory('Nature')">Nature</button>
+
+</div>
+    
   <input
   type="text"
   id="searchBox"
