@@ -167,14 +167,18 @@ const descriptions = {
   "Magic Effects":"Visual effects for spells, magic, and energy.",
   "Stylized Nature":"Stylized natural environments and scenery."
 };
-
-  function showExplore(){
+   
+    function showExplore(){
   document.getElementById("assetDetail").style.display="none";
-  document.getElementById("library").innerHTML="";
-  document.getElementById("library").style.display="none";
+
+  const library = document.getElementById("library");
+  library.innerHTML="";
+  library.style.display="none";
+
   document.getElementById("exploreGrid").style.display="grid";
+
   renderAssets();
-  }
+}
   
 function renderAssets(){
   document.getElementById("assetDetail").style.display="none";
@@ -183,21 +187,21 @@ function renderAssets(){
 
   let html="";
 
-const filteredItems = window.currentItems || items;
+  const filteredItems = window.currentItems || items;
 
-filteredItems.forEach(item=>{
+  filteredItems.forEach(item=>{
     html += `
       <div class="card">
         <div class="thumb">${item[1]}</div>
 
         <div class="cardbody">
-  <small>ANIMATION ASSET</small>
-  <h3>${item[0]}</h3>
+          <small>ANIMATION ASSET</small>
+          <h3>${item[0]}</h3>
 
-<button class="cta"
-onclick="openAssetDetail('${item[0]}','${item[1]}')">
-View Details
-</button>
+          <button class="cta"
+          onclick="openAssetDetail('${item[0]}','${getAssetIcon(item[0])}')">
+          View Details
+          </button>
 
           <button class="cta"
           onclick="addToLibrary('${item[0]}')">
@@ -210,6 +214,7 @@ View Details
 
   document.getElementById("exploreGrid").innerHTML = html;
 }
+  
 
 function addToLibrary(name){
   let library =
@@ -285,9 +290,9 @@ document.getElementById("assetDetail").style.display = "none";
       <div class="cardbody">
         <h3>${item}</h3>
         <button class="cta"
-        onclick="openAssetDetail('${item}','${getAssetIcon(item)}')"
-        View Details
-        </button>
+onclick="openAssetDetail('${item}','${getAssetIcon(item)}')">
+View Details
+</button>
       </div>
     </div>
   `).join("") +
@@ -310,7 +315,7 @@ renderAssets();
 </script>
 
   <nav class="bottom-nav">
-  <button onclick="location.reload()">🎬<span>Explore</span></button>
+  <button onclick="showExplore()">🎬<span>Explore</span></button>
   <button onclick="showLibrary()">📚<span>Library</span></button>
   <button onclick="showToast('Favorites coming soon')">❤️<span>Favorites</span></button>
 </nav>
