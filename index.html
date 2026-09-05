@@ -280,6 +280,18 @@ function showToast(text){
     `</div>`;
 }
 
+  function searchAssets(){
+  const term =
+    document.getElementById("searchBox")
+    .value
+    .toLowerCase();
+
+  window.currentItems = items.filter(item =>
+    item[0].toLowerCase().includes(term)
+  );
+
+  renderAssets();
+  }
 renderAssets();
 </script>
 
