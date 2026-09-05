@@ -12,6 +12,7 @@
   max-width:500px;
   margin:80px auto;
   padding:30px 20px;
+  display:block;
 }
 
 .welcomeIcon{
@@ -188,7 +189,9 @@ z-index:9999;
     Explore Animora ✨
   </button>
   </div>
-  
+
+  <div id="appContent" style="display:none;">
+    
 <h1>Animora v3</h1>
 
 <button onclick="showLibrary()" class="cta">
@@ -228,7 +231,9 @@ z-index:9999;
 </div>
 
 <div id="toast"></div>
-
+  
+  </div>
+  
 <script>
 const items = [
   ["Anime Hero Rig","♟"],
@@ -249,18 +254,21 @@ const descriptions = {
 };
    
     function showExplore(){
-  document.getElementById("assetDetail").style.display="none";
+  document.getElementById("welcomeScreen").style.display = "none";
+  document.getElementById("appContent").style.display = "block";
+
+  document.getElementById("assetDetail").style.display = "none";
 
   const library = document.getElementById("library");
-  library.innerHTML="";
-  library.style.display="none";
+  library.innerHTML = "";
+  library.style.display = "none";
 
-  document.getElementById("favorites").style.display="none";
-  document.getElementById("searchBox").style.display="block";   
-  document.getElementById("exploreGrid").style.display="grid";
+  document.getElementById("favorites").style.display = "none";
+  document.getElementById("searchBox").style.display = "block";
+  document.getElementById("exploreGrid").style.display = "grid";
 
   renderAssets();
-}
+    }
   
 function renderAssets(){
   document.getElementById("assetDetail").style.display="none";
