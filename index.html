@@ -593,26 +593,24 @@ button.classList.add("active");
 }
 
   function downloadAsset(name){
-  const content =
-    "Animora Asset\n\n" +
-    "Asset: " + name + "\n" +
-    "Created with Animora.";
+  const assetFiles = {
+    "Neon City": "assets/neon-city.txt"
+  };
 
-  const blob = new Blob([content], {
-    type: "text/plain"
-  });
+  const file = assetFiles[name];
 
-  const url = URL.createObjectURL(blob);
+  if(!file){
+    showToast("Download not available yet.");
+    return;
+  }
 
   const link = document.createElement("a");
-  link.href = url;
-  link.download = name.replace(/\s+/g, "_") + ".txt";
+  link.href = file;
+  link.download = file.split("/").pop();
 
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-
-  URL.revokeObjectURL(url);
 
   showToast("Asset downloaded!");
   }
