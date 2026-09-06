@@ -475,8 +475,11 @@ const descriptions = {
   "Magic Effects":"Visual effects for spells, magic, and energy.",
   "Stylized Nature":"Stylized natural environments and scenery."
 };
-   
+
+  let currentView = "explore";
+  
     function showExplore(){
+    currentView = "explore";
   document.getElementById("welcomeScreen").style.display = "none";
   document.getElementById("appContent").style.display = "block";
 
@@ -633,28 +636,52 @@ function addToLibrary(name){
   }
   
   function openAssetDetail(name, icon){
-  document.getElementById("exploreGrid").style.display="none";
-  document.getElementById("library").style.display="none";
+  // Show Asset Detail
+  document.getElementById("assetDetail").style.display = "block";
 
-  document.getElementById("assetDetail").style.display="block";
+  // Hide other main sections
+  document.getElementById("exploreGrid").style.display = "none";
+  document.getElementById("library").style.display = "none";
+  document.getElementById("favorites").style.display = "none";
+  document.getElementById("profile").style.display = "none";
 
-  document.getElementById("detailThumb").innerText=icon;
-  document.getElementById("detailTitle").innerText=name;
-  document.getElementById("detailDescription").innerText=descriptions[name];
+  // Hide Explore-only content
+  document.getElementById("searchBox").style.display = "none";
+  document.querySelector(".categories").style.display = "none";
+  document.getElementById("exploreHero").style.display = "none";
+  document.getElementById("exploreTitle").style.display = "none";
+  document.getElementById("featuredCard").style.display = "none";
+  document.getElementById("libraryButton").style.display = "none";
 
-    document.getElementById("detailLibraryButton").onclick=function(){
+  // Fill Asset Details
+  document.getElementById("detailThumb").innerText = icon;
+  document.getElementById("detailTitle").innerText = name;
+  document.getElementById("detailDescription").innerText = descriptions[name];
+
+  // Library button
+  document.getElementById("detailLibraryButton").onclick = function(){
     addToLibrary(name);
   };
 
-  document.getElementById("detailFavoriteButton").onclick=function(){
+  // Favorites button
+  document.getElementById("detailFavoriteButton").onclick = function(){
     addToFavorites(name);
   };
   }
   
 function closeAssetDetail(){
-  document.getElementById("assetDetail").style.display="none";
-  document.getElementById("exploreGrid").style.display="grid";
-}
+  document.getElementById("assetDetail").style.display = "none";
+
+  if (currentView === "favorites") {
+    showFavorites();
+  } 
+  else if (currentView === "library") {
+    showLibrary();
+  } 
+  else {
+    showExplore();
+  }
+  }
   
 function showToast(text){
   const toast=document.getElementById("toast");
@@ -671,18 +698,32 @@ function showToast(text){
   const asset = items.find(item => item[0] === name);
   return asset ? asset[1] : "📦";
   }
-  function showLibrary(){
-    const library =
-    JSON.parse(localStorage.getItem("animora_library")) || [];
+  
+function showLibrary(){
+  currentView = "library";
+  
+  const library =
+  JSON.parse(localStorage.getItem("animora_library")) || [];
 
   const box = document.getElementById("library");
 
-box.style.display = "block";
-document.getElementById("exploreGrid").style.display = "none";
-document.getElementById("assetDetail").style.display = "none";
-document.getElementById("favorites").style.display = "none";
-document.getElementById("searchBox").style.display = "none";
-    
+  // Show Library
+  box.style.display = "block";
+
+  // Hide other sections
+  document.getElementById("favorites").style.display = "none";
+  document.getElementById("profile").style.display = "none";
+  document.getElementById("exploreGrid").style.display = "none";
+  document.getElementById("assetDetail").style.display = "none";
+  document.getElementById("searchBox").style.display = "none";
+
+  // Hide Explore-only content
+  document.getElementById("exploreHero").style.display = "none";
+  document.getElementById("exploreTitle").style.display = "none";
+  document.getElementById("featuredCard").style.display = "none";
+  document.getElementById("libraryButton").style.display = "none";
+  document.querySelector(".categories").style.display = "none";
+
   if(library.length === 0){
     box.innerHTML = "<p>Your library is empty.</p>";
     return;
@@ -696,17 +737,21 @@ document.getElementById("searchBox").style.display = "none";
       <div class="thumb">${getAssetIcon(item)}</div>
       <div class="cardbody">
         <h3>${item}</h3>
+
         <button class="cta"
-onclick="openAssetDetail('${item}','${getAssetIcon(item)}')">
-View Details
-</button>
+        onclick="openAssetDetail('${item}','${getAssetIcon(item)}')">
+        View Details
+        </button>
+
       </div>
     </div>
   `).join("") +
-    `</div>`;
+  `</div>`;
 }
 
   function showFavorites(){
+    currentView = "favorites";
+    
   const favorites =
     JSON.parse(localStorage.getItem("animora_favorites")) || [];
 
@@ -753,8 +798,10 @@ onclick="removeFromFavorites('${item}')">
   }
 
   function showProfile(){
+    currentView = "profile";
+    
   const library =
-    JSON.parse(localStorage.getItem("animora_library")) || [];
+   JSON.parse(localStorage.getItem("animora_library")) || [];
 
   const favorites =
     JSON.parse(localStorage.getItem("animora_favorites")) || [];
