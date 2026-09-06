@@ -450,7 +450,10 @@ z-index:9999;
 
   <button class="cta" id="detailFavoriteButton">
   ❤️ Add To Favorites
-</button>
+ </button>
+
+  <button class="cta" id="detailDownloadButton">⬇️ Download Asset</button>
+
 </div>
 
 <div id="toast"></div>
@@ -588,6 +591,31 @@ button.classList.add("active");
 
   renderAssets();
 }
+
+  function downloadAsset(name){
+  const content =
+    "Animora Asset\n\n" +
+    "Asset: " + name + "\n" +
+    "Created with Animora.";
+
+  const blob = new Blob([content], {
+    type: "text/plain"
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = name.replace(/\s+/g, "_") + ".txt";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(url);
+
+  showToast("Asset downloaded!");
+  }
   
 function addToLibrary(name){
   let library =
@@ -665,8 +693,12 @@ function addToLibrary(name){
 
   // Favorites button
   document.getElementById("detailFavoriteButton").onclick = function(){
-    addToFavorites(name);
-  };
+  addToFavorites(name);
+};
+
+document.getElementById("detailDownloadButton").onclick = function(){
+  downloadAsset(name);
+};
   }
   
 function closeAssetDetail(){
