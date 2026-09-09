@@ -928,7 +928,7 @@ document.getElementById("libraryButton").style.display = "none";
     <div class="card profile-card">
       <div class="cardbody">
 
-        <h3>👤 Account</h3>
+        <h3 onclick="showAuth()" style="cursor:pointer;">👤 Account</h3>
 
         <button class="cta" onclick="editUsername()">
           ✏️ Edit Username
@@ -974,6 +974,27 @@ document.getElementById("libraryButton").style.display = "none";
   renderAssets();
   }
 renderAssets();
+
+  function showAuth(){
+
+    document.getElementById("welcomeScreen").style.display = "none";
+    document.getElementById("appContent").style.display = "block";
+
+    document.getElementById("exploreHero").style.display = "none";
+    document.getElementById("exploreTitle").style.display = "none";
+    document.getElementById("featuredCard").style.display = "none";
+    document.getElementById("libraryButton").style.display = "none";
+    document.getElementById("library").style.display = "none";
+    document.getElementById("favorites").style.display = "none";
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("assetDetail").style.display = "none";
+    document.getElementById("searchBox").style.display = "none";
+    document.querySelector(".categories").style.display = "none";
+    document.getElementById("exploreGrid").style.display = "none";
+
+    document.getElementById("authScreen").style.display = "block";
+  }
+
 </script>
 
   <nav class="bottom-nav">
