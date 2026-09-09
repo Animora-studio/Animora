@@ -415,6 +415,48 @@ z-index:9999;
   
 <div id="favorites" style="display:none;"></div>
 
+    <div id="authScreen" style="display:none;">
+  <div class="card">
+    <div class="cardbody">
+
+      <h2 id="authTitle">Create your Animora account</h2>
+      <p id="authSubtitle">Sign up to save your animation assets.</p>
+
+      <input
+        id="authEmail"
+        type="email"
+        placeholder="Email"
+        autocomplete="email"
+      >
+
+      <input
+        id="authPassword"
+        type="password"
+        placeholder="Password"
+        autocomplete="current-password"
+      >
+
+      <button class="cta" onclick="handleAuth()">
+        <span id="authButtonText">Sign Up</span>
+      </button>
+
+      <p id="authMessage"></p>
+
+      <p>
+        <span id="authSwitchText">Already have an account?</span>
+        <button
+          type="button"
+          onclick="toggleAuthMode()"
+          style="background:none;border:none;color:inherit;text-decoration:underline;cursor:pointer;"
+        >
+          <span id="authSwitchButton">Log In</span>
+        </button>
+      </p>
+
+    </div>
+  </div>
+</div>
+
 <div id="profile" style="display:none;"></div>
 
 <div class="categories">
