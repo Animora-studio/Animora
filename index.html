@@ -991,7 +991,40 @@ renderAssets();
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
   );
+
+  async function handleAuth(){
+
+    const email =
+      document.getElementById("authEmail").value.trim();
+
+    const password =
+      document.getElementById("authPassword").value;
+
+    const message =
+      document.getElementById("authMessage");
+
+    if(!email || !password){
+      message.innerText = "Please enter your email and password.";
+      return;
+    }
+
+    message.innerText = "Creating your account...";
+
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password
+    });
+
+    if(error){
+      message.innerText = error.message;
+      return;
+    }
+
+    message.innerText =
+      "Account created! Check your email to confirm your account.";
+
+  }
 </script>
-  
+
 </body>
 </html>
