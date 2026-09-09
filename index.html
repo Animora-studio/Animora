@@ -1030,6 +1030,7 @@ renderAssets();
     }
 
     message.innerText = "Creating your account...";
+    console.log("Auth button reached");
 
     const { data, error } = await supabase.auth.signUp({
       email: email,
