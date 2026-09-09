@@ -940,6 +940,16 @@ renderAssets();
   <button onclick="showFavorites()">❤️<span>Favorites</span></button>
   <button onclick="showProfile()">👤<span>Profile</span></button>
 </nav>
+
+<script>
+  const SUPABASE_URL = "https://ynswfdacgaqmecnpvebq.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_kNr05FNQBKaHgvTvPiEkKg_YfUkqv--";
+
+  const supabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+</script>
   
 </body>
 </html>
