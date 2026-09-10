@@ -1010,12 +1010,14 @@ renderAssets();
   const SUPABASE_URL = "https://ynswfdacgaqmecnpvebq.supabase.co";
   const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_kNr05FNQBKaHgvTvPiEkKg_YfUkqv--";
 
-  const supabase = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
+  alert(typeof window.supabase);
 
-  alert("SUPABASE LOADED");
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+alert("SUPABASE LOADED");
     
   alert("Script reached handleAuth");
 
