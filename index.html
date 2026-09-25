@@ -1005,60 +1005,105 @@ renderAssets();
 </nav>
 
 <script>
-  document.body.insertAdjacentHTML("afterbegin", "<h1>ANIMORA TEST 123</h1>");
-  
-  const SUPABASE_URL = "https://ynswfdacgaqmecnpvebq.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_kNr05FNQBKaHgvTvPiEkKg_YfUkqv--";
-
-  alert(typeof window.supabase);
+const SUPABASE_URL = "https://ynswfdacgaqmecnpvebq.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_kNr05FNQBKaHgvTvPiEkKg_YfUkqv--";
 
 const supabase = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
 );
 
-alert("SUPABASE LOADED");
-    
-  alert("Script reached handleAuth");
+let authMode = "signup";
 
-  alert("AUTH SCRIPT LOADED");
-  
-  alert("HANDLE AUTH DEFINED");
-  
-  window.handleAuth = async function(){
-   
-    console.log("handleAuth function started");
+window.handleAuth = async function(){
 
-    const email =
-      document.getElementById("authEmail").value.trim();
+  const email =
+    document.getElementById("authEmail").value.trim();
 
-    const password =
-      document.getElementById("authPassword").value;
+  const password =
+    document.getElementById("authPassword").value;
 
-    const message =
-      document.getElementById("authMessage");
+  const message =
+    document.getElementById("authMessage");
 
-    if(!email || !password){
-      message.innerText = "Please enter your email and password.";
-      return;
-    }
+  if(!email || !password){
+    message.innerText = "Please enter your email and password.";
+    return;
+  }
 
-    message.innerText = "Creating your account...";
-    console.log("Auth button reached");
+  message.innerText =
+    authMode === "signup"
+    ? "Creating your account..."
+    : "Logging you in...";
 
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password
-    });
+  if(authMode === "signup"){
+
+    const { data, error } =
+      await supabase.auth.signUp({
+        email: email,
+        password: password
+      });
 
     if(error){
       message.innerText = error.message;
       return;
     }
 
-  message.innerText =
-    "Account created! Check your email to confirm your account.";
+    message.innerText =
+      "Account created! Check your email to confirm your account.";
 
+  } else {
+
+    const { data, error } =
+      await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+    if(error){
+      message.innerText = error.message;
+      return;
+    }
+
+    message.innerText = "Login successful!";
+
+    setTimeout(() => {
+      showExplore();
+    }, 1000);
+  }
+};
+
+window.toggleAuthMode = function(){
+
+  const title = document.getElementById("authTitle");
+  const subtitle = document.getElementById("authSubtitle");
+  const buttonText = document.getElementById("authButtonText");
+  const switchText = document.getElementById("authSwitchText");
+  const switchButton = document.getElementById("authSwitchButton");
+  const message = document.getElementById("authMessage");
+
+  message.innerText = "";
+
+  if(authMode === "signup"){
+
+    authMode = "login";
+
+    title.innerText = "Welcome back to Animora";
+    subtitle.innerText = "Log in to access your animation library.";
+    buttonText.innerText = "Log In";
+    switchText.innerText = "Don't have an account?";
+    switchButton.innerText = "Sign Up";
+
+  } else {
+
+    authMode = "signup";
+
+    title.innerText = "Create your Animora account";
+    subtitle.innerText = "Sign up to save your animation assets.";
+    buttonText.innerText = "Sign Up";
+    switchText.innerText = "Already have an account?";
+    switchButton.innerText = "Log In";
+  }
 };
 </script>
 
